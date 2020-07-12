@@ -1,8 +1,8 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const connectDatabase = require("./helpers/db/connect_db");
+const connectDatabase = require("./helpers/connect_db");
 const routers = require("./routers");
-const customError = require("./middlewares/error/custom_error_handler");
+const customError = require("./middlewares/custom_error_handler");
 const path = require("path");
 
 const app = express();

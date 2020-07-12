@@ -1,9 +1,8 @@
 const express = require("express");
+const { index } = require("../controllers/auth");
 
 const router = express.Router();
 
-router.get("/", (req, res, next) => {
-    res.send("Hello, auth!");
-})
+router.use("/", index);
 
 module.exports = router;

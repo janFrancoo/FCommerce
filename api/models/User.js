@@ -77,7 +77,7 @@ UserSchema.methods.getMailVerificationToken = function() {
     .digest("hex");
 
     this.emailVerificationToken = emailVerificationToken;
-    this.emailVerificationToken = Date.now() + parseInt(EMAIL_VERIFICATION_EXPIRE);
+    this.emailVerificationExpire = Date.now() + parseInt(EMAIL_VERIFICATION_EXPIRE);
 
     return emailVerificationToken;
 };

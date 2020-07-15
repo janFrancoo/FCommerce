@@ -24,7 +24,7 @@ const addProductToCart = asyncHandler(async (req, res, next) => {
     const { id, amount } = req.body;
 
     if (!id)
-        return next(new CustomError("Missing product"), 400);
+        return next(new CustomError("Missing input"), 400);
 
     const product = await Product.findById(id);
 
@@ -35,28 +35,28 @@ const addProductToCart = asyncHandler(async (req, res, next) => {
         user: req.user.id
     }).populate("products.product");
 
-    cart.products.map(async (item, idx) => {
-        if (item.product.id === id) {
-            products[idx].quantity += (amount || 1);
-            await cart.save();
-            res.status(200).json({
-                success: true,
-                cart
-            });
-        }
-    });
-
-    cart.products.push({
-        product,
-        quantity: amount || 1
-    });
-
-    await cart.save();
-
-    res.status(200).json({
-        success: true,
-        cart
-    });
+    const idx = cart.products.findIndex(item => item.product.id == id);
+    
+    if (idx === -1) {
+        cart.products.push({
+            product,
+            quantity: amount || 1
+        });
+    
+        await cart.save();
+    
+        res.status(200).json({
+            success: true,
+            cart
+        });
+    } else {
+        cart.products[idx].amount += (amount || 1);
+        await cart.save();
+        res.status(200).json({
+            success: true,
+            cart
+        });
+    }
 });
 
 const removeProductFromCart = asyncHandler(async (req, res, next) => {
@@ -74,11 +74,12 @@ const removeProductFromCart = asyncHandler(async (req, res, next) => {
         user: req.user.id
     }).populate("products.product");
 
-    cart.products = cart.products.filter((item) => { return item.id != id });
+    cart.products = cart.products.filter((item) => { return item.product._id != id });
     await cart.save(); 
 
     res.status(200).json({
         success: true,
+        cart
     });
 });
 

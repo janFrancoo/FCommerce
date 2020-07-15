@@ -16,10 +16,10 @@ const ProductSchema = new Schema({
         type: Number,
         default: 0
     },
-    image: {
+    images: [{
         type: String,
         default: "default.jpg"
-    },
+    }],
     category: {
         type: mongoose.Schema.ObjectId,
         ref: "Category",

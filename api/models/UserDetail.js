@@ -32,9 +32,8 @@ const UserDetailSchema = new Schema({
             ]
         }
     }],
-    cart: {
-        type: mongoose.Schema.ObjectId,
-        ref: "Cart"
+    address: {
+        type: String
     }
 });
 

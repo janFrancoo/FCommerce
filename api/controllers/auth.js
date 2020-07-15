@@ -1,6 +1,8 @@
 const asyncHandler = require("express-async-handler");
 const CustomError = require("../helpers/CustomError");
 const User = require("../models/User");
+const UserDetail = require("../models/UserDetail");
+const Cart = require("../models/Cart");
 const { sendJWT } = require("../helpers/token");
 const bcrypt = require('bcrypt');
 const sendEmail = require("../helpers/mail");
@@ -15,6 +17,14 @@ const register = asyncHandler(async (req, res, next) => {
         email,
         username,
         password
+    });
+
+    await UserDetail.create({
+        user: user
+    });
+
+    await Cart.create({
+        user: user
     });
 
     const verificationToken = user.getMailVerificationToken();

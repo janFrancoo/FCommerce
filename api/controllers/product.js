@@ -19,14 +19,12 @@ const getProduct = asyncHandler(async (req, res, next) => {
 });
 
 const getProducts = asyncHandler(async (req, res, next) => {
-    const { categoryName } = req.body;
+    const { categoryId } = req.query;
 
-    if (!categoryName)
+    if (!categoryId)
         return next(new CustomError("Missing input"), 400);
 
-    const category = await Category.findOne({
-        name: categoryName
-    });
+    const category = await Category.findById(categoryId);
 
     if (!category)
         return next(new CustomError("Category not found"), 404);

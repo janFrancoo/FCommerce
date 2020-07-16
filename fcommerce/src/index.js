@@ -11,13 +11,11 @@ import configureStore from "./redux/reducers/configureStore";
 const store = configureStore()
 
 ReactDOM.render(
-  <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
         <App />
       </Provider>
-    </BrowserRouter>
-  </React.StrictMode>,
+    </BrowserRouter>,
   document.getElementById('root')
 );
 

@@ -10,3 +10,8 @@ export const getCategoriesSuccess = (categories) => ({
     type: actionTypes.GET_CATEGORIES_SUCCESS,
     payload: categories
 });
+
+export const changeCategory = (category) => ({
+    type: actionTypes.CHANGE_CATEGORY,
+    payload: category
+});

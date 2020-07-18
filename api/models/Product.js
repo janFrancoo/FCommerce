@@ -24,6 +24,9 @@ const ProductSchema = new Schema({
         type: mongoose.Schema.ObjectId,
         ref: "Category",
         required: [true, "Please, select a category"]
+    },
+    decription: {
+        type: String
     }
 });
 

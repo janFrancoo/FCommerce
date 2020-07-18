@@ -4,5 +4,7 @@ export default {
         _id: "5f0f6fef040f321fd838bd47"
     },
     categories: [],
-    products: []
+    products: [],
+    product: { },
+    user: { }
 }

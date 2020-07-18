@@ -17,11 +17,20 @@ const verifyJWT = (req, res, next) => {
         req.user = {
             id: decoded.id,
             name: decoded.name,
-            role: decoded.role
+            user: decoded.username,
+            role: decoded.role,
+            emailVerificationToken: decoded.emailVerificationToken
         };
 
         next();
     });
+};
+
+const isVerified = (req, res, next) => {
+    if (req.user.emailVerificationToken)
+        return next(new CustomError("You must verify your e-mail address"), 403);
+
+    next();
 };
 
 const getAdminAccess = (req, res, next) => {
@@ -29,9 +38,10 @@ const getAdminAccess = (req, res, next) => {
         return next(new CustomError("You do not have admin authority to access here"), 403);
 
     next();
-}
+};
 
 module.exports = {
     verifyJWT,
+    isVerified,
     getAdminAccess
 }

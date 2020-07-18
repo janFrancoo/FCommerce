@@ -88,7 +88,7 @@ const getComments = asyncHandler(async (req, res, next) => {
 });
 
 const addProduct = asyncHandler(async (req, res, next) => {
-    const { productName, stock, price, images, categoryName } = req.body;
+    const { productName, stock, price, images, categoryName, description } = req.body;
 
     if (!(productName && categoryName))
         return next(new CustomError("Missing inputs"), 400);
@@ -105,7 +105,8 @@ const addProduct = asyncHandler(async (req, res, next) => {
         inStock: stock,
         price,
         images,
-        category
+        category,
+        description
     });
 
     res.status(200).json({
@@ -115,7 +116,7 @@ const addProduct = asyncHandler(async (req, res, next) => {
 });
 
 const updateProduct = asyncHandler(async (req, res, next) => {
-    const { id, productName, stock, price, images, categoryName } = req.body;
+    const { id, productName, stock, price, images, categoryName, description } = req.body;
 
     if (!(productName && categoryName))
         return next(new CustomError("Missing inputs"), 400);
@@ -132,7 +133,8 @@ const updateProduct = asyncHandler(async (req, res, next) => {
         inStock: stock,
         price,
         images,
-        category
+        category,
+        description
     }, { new: true });
 
     if (!product)

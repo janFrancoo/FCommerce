@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Table, Button } from "reactstrap";
+import { Link } from "react-router-dom";
 
 class ProductList extends Component {
   render() {
@@ -17,7 +18,7 @@ class ProductList extends Component {
           {this.props.products.length !== 0 &&
             this.props.products.products.map((product) => (
               <tr key={product._id}>
-                <td>{product.productName}</td>
+                <td><Link to={"/product/" + product._id}>{product.productName}</Link></td>
                 <td>{product.price} TL</td>
                 <td><Button color="primary" size="sm">Add to Cart</Button></td>
               </tr>

@@ -58,7 +58,9 @@ UserSchema.methods.getJWT = function() {
     const payload = {
         id: this._id,
         email: this.email,
-        role: this.role
+        username: this.username,
+        role: this.role,
+        emailVerificationToken: this.emailVerificationToken
     };
 
     const token = jwt.sign(payload, JWT_SECRET_KEY, {

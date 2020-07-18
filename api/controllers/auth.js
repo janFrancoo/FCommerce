@@ -29,7 +29,7 @@ const register = asyncHandler(async (req, res, next) => {
 
     const verificationToken = user.getMailVerificationToken();
     await user.save();
-    const verifyMailUrl = `http://localhost:5000/api/auth/confirm?verificationToken=${verificationToken}`;
+    const verifyMailUrl = `http://localhost:3000/auth/verify-email?verificationToken=${verificationToken}`;
     const mailTemplate = `
         <h3>Confirm your e-mail</h3>
         <p>Click <a href='${verifyMailUrl}' target='_blank'>here.</a> for verify your e-mail address.`;

@@ -12,7 +12,7 @@ const sendJWT = (user, res) => {
         access_token: token,
         data: {
             email: user.email,
-            role: user.role
+            username: user.username,
         }
     });
 };

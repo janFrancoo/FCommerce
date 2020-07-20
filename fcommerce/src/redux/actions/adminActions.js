@@ -32,18 +32,25 @@ export const checkAdminAccessFail = () => ({
 
 export const addProduct = (productName, categoryName, stock, price, images, description) => (function (dispatch) {
     const accessToken = new Cookies().get("accessToken");
+    const formData = new FormData();
+    formData.append('productName', productName);
+    formData.append('categoryName', categoryName);
+    formData.append('stock', stock);
+    formData.append('price', price);
+    for (let i=0; i<images.length; i++)
+        formData.append('photos', images[i]);
+    formData.append('description', description);
 
     return fetch('http://localhost:5000/api/product/add-product', {
         method: 'post',
         headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json',
             'Authorization': 'Bearer: ' + accessToken
         },
-        body: JSON.stringify({productName, categoryName, stock, price, images, description})})
+        body: formData })
     .then(res => res.json())
     .then(res => {
         if (res.success !== false) {
+            alertify.success("Product added successfully!");
             return dispatch(addProductSuccess(res.product));
         } else {
             alertify.error(res.message);
@@ -65,7 +72,7 @@ export const addProductFail = () => ({
 export const removeProduct = (productId) => (function (dispatch) {
     const accessToken = new Cookies().get("accessToken");
 
-    return fetch('http://localhost:5000/api/product/add-product', {
+    return fetch('http://localhost:5000/api/product/remove-product', {
         method: 'delete',
         headers: {
             'Accept': 'application/json, text/plain, */*',
@@ -76,7 +83,7 @@ export const removeProduct = (productId) => (function (dispatch) {
     .then(res => res.json())
     .then(res => {
         if (res.success !== false) {
-            return dispatch(removeProductSuccess());
+            return dispatch(removeProductSuccess(productId));
         } else {
             alertify.error(res.message);
             return dispatch(removeProductFail());
@@ -84,9 +91,9 @@ export const removeProduct = (productId) => (function (dispatch) {
     });
 });
 
-export const removeProductSuccess = () => ({
+export const removeProductSuccess = (productId) => ({
     type: actionTypes.REMOVE_PRODUCT_SUCCESS,
-    payload: true
+    payload: productId
 });
 
 export const removeProductFail = () => ({
@@ -96,18 +103,26 @@ export const removeProductFail = () => ({
 
 export const updateProduct = (productId, productName, categoryName, stock, price, images, description) => (function (dispatch) {
     const accessToken = new Cookies().get("accessToken");
+    const formData = new FormData();
+    formData.append('id', productId);
+    formData.append('productName', productName);
+    formData.append('categoryName', categoryName);
+    formData.append('stock', stock);
+    formData.append('price', price);
+    for (let i=0; i<images.length; i++)
+        formData.append('photos', images[i]);
+    formData.append('description', description);
 
     return fetch('http://localhost:5000/api/product/update-product', {
         method: 'put',
         headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json',
             'Authorization': 'Bearer: ' + accessToken
         },
-        body: JSON.stringify({id: productId, productName, categoryName, stock, price, images, description})})
+        body: formData })
     .then(res => res.json())
     .then(res => {
         if (res.success !== false) {
+            alertify.success("Product updated successfully!");
             return dispatch(updateProductSuccess(res.product));
         } else {
             alertify.error(res.message);

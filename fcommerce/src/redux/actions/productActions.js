@@ -5,7 +5,7 @@ import alertify from "alertifyjs";
 export const getProducts = (categoryId) => (function (dispatch) {
     const url = "http://localhost:5000/api/product/products?categoryId=" + categoryId;
     return fetch(url).then(res => res.json())
-    .then(res => dispatch(getProductsSuccess(res)))
+    .then(res => dispatch(getProductsSuccess(res.products)))
 });
 
 export const getProduct = (productId) => (function (dispatch) {

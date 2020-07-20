@@ -28,7 +28,7 @@ class Admin extends Component {
                 <ListGroupItem onClick={() => this.setState({component: <Alert color="info">Admin panel home</Alert>})}>Home</ListGroupItem>
                 <ListGroupItem onClick={() => this.setState({component: <AdminOrders />})}>Manage orders</ListGroupItem>
                 <ListGroupItem onClick={() => this.setState({component: <AdminCategory />})}>Manage categories</ListGroupItem>
-                <ListGroupItem onClick={() => this.setState({component: <AdminProduct />})}>Manage Products</ListGroupItem>
+                <ListGroupItem onClick={() => this.setState({component: <AdminProduct />})}>Manage products</ListGroupItem>
               </ListGroup> 
             </Col>
             <Col xs="6">

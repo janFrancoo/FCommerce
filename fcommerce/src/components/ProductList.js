@@ -17,8 +17,8 @@ class ProductList extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.props.products.length !== 0 &&
-            this.props.products.products.map((product) => (
+          {
+            this.props.products.map((product) => (
               <tr key={product._id}>
                 <td><Link to={"/product/" + product._id}>{product.productName}</Link></td>
                 <td>{product.price} TL</td>

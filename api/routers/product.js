@@ -8,10 +8,9 @@ const router = express.Router();
 
 router.get("/products", getProducts);
 router.post("/add-comment", [verifyJWT, isVerified], addComment);
-router.post("/add-product", [verifyJWT, getAdminAccess], addProduct);
-router.put("/update-product", [verifyJWT, getAdminAccess], updateProduct);
+router.post("/add-product", [verifyJWT, getAdminAccess, mediaUpload.array('photos', 5)], addProduct);
+router.put("/update-product", [verifyJWT, getAdminAccess, mediaUpload.array('photos', 5)], updateProduct);
 router.delete("/remove-product", [verifyJWT, getAdminAccess], removeProduct);
-router.post("/media-upload", [verifyJWT, getAdminAccess, mediaUpload.array('photos', 5)], uploadProductImages);
 router.get("/:id/comments", getComments);
 router.get("/:id", getProduct);
 

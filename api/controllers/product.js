@@ -88,7 +88,12 @@ const getComments = asyncHandler(async (req, res, next) => {
 });
 
 const addProduct = asyncHandler(async (req, res, next) => {
-    const { productName, stock, price, images, categoryName, description } = req.body;
+    const { productName, stock, price, categoryName, description } = req.body;
+
+    const images = [];
+    for (let i = 0; i < req.files.length; i++) {
+        images.push(req.files[i].filename);
+    }
 
     if (!(productName && categoryName))
         return next(new CustomError("Missing inputs"), 400);
@@ -116,7 +121,12 @@ const addProduct = asyncHandler(async (req, res, next) => {
 });
 
 const updateProduct = asyncHandler(async (req, res, next) => {
-    const { id, productName, stock, price, images, categoryName, description } = req.body;
+    const { id, productName, stock, price, categoryName, description } = req.body;
+
+    const images = [];
+    for (let i = 0; i < req.files.length; i++) {
+        images.push(req.files[i].filename);
+    }
 
     if (!(productName && categoryName))
         return next(new CustomError("Missing inputs"), 400);
@@ -156,19 +166,6 @@ const removeProduct = asyncHandler(async (req, res, next) => {
     });
 });
 
-const uploadProductImages = asyncHandler(async (req, res, next) => {
-    const images = [];
-    console.log(req.files);
-    for (let i = 0; i < req.files.length; i++) {
-        images.push(req.files[i].filename);
-    }
-
-    res.status(200).json({
-        success: true,
-        images
-    });
-});
-
 module.exports = {
     getProduct,
     getProducts,
@@ -176,6 +173,5 @@ module.exports = {
     getComments,
     addProduct,
     updateProduct,
-    removeProduct,
-    uploadProductImages
+    removeProduct
 };

@@ -25,7 +25,7 @@ const ProductSchema = new Schema({
         ref: "Category",
         required: [true, "Please, select a category"]
     },
-    decription: {
+    description: {
         type: String
     }
 });

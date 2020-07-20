@@ -166,6 +166,25 @@ const removeProduct = asyncHandler(async (req, res, next) => {
     });
 });
 
+const searchProduct = asyncHandler(async (req, res, next) => {
+    const key = req.query.productName;
+
+    if (!key)
+        return next(new CustomError("Missing key"), 400);
+
+    const products = await Product.find({
+        productName: { 
+            "$regex": key, 
+            "$options": "i"
+        },
+    });
+
+    res.status(200).json({
+        success: true,
+        products
+    });
+});
+
 module.exports = {
     getProduct,
     getProducts,
@@ -173,5 +192,6 @@ module.exports = {
     getComments,
     addProduct,
     updateProduct,
-    removeProduct
+    removeProduct,
+    searchProduct
 };

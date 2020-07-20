@@ -84,3 +84,26 @@ export const removeProductFromCartFail = (message) => ({
     type: actionTypes.REMOVE_PRODUCT_FROM_CART_FAIL,
     payload: message
 });
+
+export const searchProduct = (key) => (function (dispatch) {
+    return fetch("http://localhost:5000/api/product/search-product?productName=" + key)
+    .then(res => res.json())
+    .then(res => {
+        if (res.success !== false) {
+            return dispatch(searchProductSuccess(res.products));
+        } else {
+            alertify.error(res.message);
+            return dispatch(searchProductFail());
+        }
+    })
+});
+
+export const searchProductSuccess = (products) => ({
+    type: actionTypes.SEARCH_PRODUCT_SUCCESS,
+    payload: products
+});
+
+export const searchProductFail = () => ({
+    type: actionTypes.SEARCH_PRODUCT_FAIL,
+    payload: []
+});

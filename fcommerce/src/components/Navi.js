@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Cookies from "universal-cookie";
 import Cart from "./Cart";
+import Search from "./Search";
 import { Link } from "react-router-dom";
 import {
   Collapse,
@@ -10,7 +11,6 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   Container,
   Button,
   Row,
@@ -22,7 +22,7 @@ class Navi extends Component {
   };
 
   toggle() {
-    this.setState({isOpen: !this.state.isOpen});
+    this.setState({ isOpen: !this.state.isOpen });
   }
 
   logout() {
@@ -42,19 +42,33 @@ class Navi extends Component {
             <NavbarBrand href="/">FCommerce</NavbarBrand>
             <NavbarToggler onClick={() => this.toggle()} />
             <Collapse isOpen={this.state.isOpen} navbar>
-              <Nav className="mr-auto" navbar>
+              <Nav className="mx-auto" navbar>
                 <NavItem>
-                  <NavLink href="/components/">Components</NavLink>
+                  <Search />
                 </NavItem>
               </Nav>
-              {(Object.keys(this.props.user).length !== 0 || new Cookies().get("accessToken")) ? (
+              {Object.keys(this.props.user).length !== 0 ||
+              new Cookies().get("accessToken") ? (
                 <Row>
-                  <Cart /> <Button color="primary" className="ml-2" onClick={() => this.logout()}>Logout</Button>
+                  <Cart />{" "}
+                  <Button
+                    color="primary"
+                    className="ml-2"
+                    onClick={() => this.logout()}
+                  >
+                    Logout
+                  </Button>
                 </Row>
               ) : (
                 <div>
-                  <Link to="/login"><Button color="primary" className="mr-2">Login</Button></Link> 
-                  <Link to="/register"><Button color="primary">Register</Button></Link>
+                  <Link to="/login">
+                    <Button color="primary" className="mr-2">
+                      Login
+                    </Button>
+                  </Link>
+                  <Link to="/register">
+                    <Button color="primary">Register</Button>
+                  </Link>
                 </div>
               )}
             </Collapse>
@@ -68,6 +82,7 @@ class Navi extends Component {
 function mapStateToProps(state) {
   return {
     user: state.authReducer,
+    searchResult: state.searchReducer,
   };
 }
 

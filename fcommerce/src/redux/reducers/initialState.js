@@ -8,5 +8,6 @@ export default {
     product: { },
     user: { },
     cartItems: [],
-    adminPerm: false
+    adminPerm: false,
+    searchResult: []
 }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { Link } from "react-router-dom";
 import {
   Dropdown,
   DropdownToggle,
@@ -53,7 +54,7 @@ class Cart extends Component {
             </DropdownItem>
           ))}
           <DropdownItem divider />
-          <DropdownItem>Go to cart</DropdownItem>
+          <DropdownItem><Link to="/cart" >Go to cart</Link></DropdownItem>
         </DropdownMenu>
       </Dropdown>
     );

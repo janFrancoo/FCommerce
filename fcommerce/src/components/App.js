@@ -6,6 +6,7 @@ import Home from "./Home";
 import ProductDetail from "./ProductDetail"
 import Login from './Login';
 import Register from "./Register";
+import CartDetail from "./CartDetail";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/register" component={Register}/> 
           <Route path="/auth/verify-email" component={Login}/>
           <Route path="/product/:id" component={ProductDetail}/> 
+          <Route path="/cart" component={CartDetail} />
         </Switch>
       </Container>
     </div>

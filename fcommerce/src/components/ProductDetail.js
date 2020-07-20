@@ -15,7 +15,6 @@ class ProductDetail extends Component {
   componentWillMount() {
     if (Object.keys(this.props.product).length === 0) {
         this.props.actions.getProduct(this.props.productId);
-        console.log(this.props.product);
     }
   }
 
@@ -53,7 +52,6 @@ function mapStateToProps(state, ownProps) {
   const productId = ownProps.match.params.id;
 
   return {
-    productId,
     product: state.productListReducer.success ? getProductById(state.productListReducer, productId) : state.productReducer
   };
 }

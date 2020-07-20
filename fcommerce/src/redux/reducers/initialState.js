@@ -6,5 +6,6 @@ export default {
     categories: [],
     products: [],
     product: { },
-    user: { }
+    user: { },
+    cartItems: []
 }

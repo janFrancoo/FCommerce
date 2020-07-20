@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { Table, Button } from "reactstrap";
 import { Link } from "react-router-dom";
+import * as productActions from "../redux/actions/productActions";
 
 class ProductList extends Component {
   render() {
@@ -20,7 +22,7 @@ class ProductList extends Component {
               <tr key={product._id}>
                 <td><Link to={"/product/" + product._id}>{product.productName}</Link></td>
                 <td>{product.price} TL</td>
-                <td><Button color="primary" size="sm">Add to Cart</Button></td>
+                <td><Button color="primary" size="sm" onClick={() => this.props.actions.addProductToCart(product._id)}>Add to Cart</Button></td>
               </tr>
             ))}
         </tbody>
@@ -35,4 +37,12 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(ProductList);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      addProductToCart: bindActionCreators(productActions.addProductToCart, dispatch),
+    }
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductList);

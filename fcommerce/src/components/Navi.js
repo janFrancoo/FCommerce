@@ -13,6 +13,7 @@ import {
   NavLink,
   Container,
   Button,
+  Row,
 } from "reactstrap";
 import * as authActions from "../redux/actions/authActions";
 import Cookies from "universal-cookie";
@@ -31,6 +32,8 @@ class Navi extends Component {
     cookies.remove("accessToken", { path: "/" });
     cookies.remove("email", { path: "/" });
     cookies.remove("username", { path: "/" });
+
+    window.location.reload();
   }
 
   componentDidMount() {
@@ -51,10 +54,9 @@ class Navi extends Component {
                 </NavItem>
               </Nav>
               {Object.keys(this.props.user).length !== 0 ? (
-                <div>
-                  Welcome, {this.props.user.username}
-                  <Cart /> <Button color="primary" onClick={() => this.logout()}>Logout</Button>
-                </div>
+                <Row>
+                  <Cart /> <Button color="primary" className="ml-2" onClick={() => this.logout()}>Logout</Button>
+                </Row>
               ) : (
                 <div>
                   <Link to="/login"><Button color="primary" className="mr-2">Login</Button></Link> 

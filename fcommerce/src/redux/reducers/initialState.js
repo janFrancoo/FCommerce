@@ -7,5 +7,6 @@ export default {
     products: [],
     product: { },
     user: { },
-    cartItems: []
+    cartItems: [],
+    adminPerm: false
 }

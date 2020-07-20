@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const CustomError = require("../helpers/CustomError");
+const User = require("../models/User");
 const UserDetail = require("../models/UserDetail");
 const Product = require("../models/Product");
 const Cart = require("../models/Cart");
@@ -105,10 +106,22 @@ const getCart = asyncHandler(async (req, res, next) => {
     })
 });
 
+const getProfile = asyncHandler(async (req, res, next) => {
+    const user = await User.findById(req.user.id);
+    const userDetail = await UserDetail.findOne({
+        user: req.user.id
+    });
+
+    res.status(200).json({
+        user, userDetail
+    });
+});
+
 module.exports = {
     updateAddress,
     addProductToCart,
     removeProductFromCart,
     getOrders,
-    getCart
+    getCart,
+    getProfile
 };

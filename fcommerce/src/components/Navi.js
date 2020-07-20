@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import Cookies from "universal-cookie";
 import Cart from "./Cart";
 import { Link } from "react-router-dom";
 import {
@@ -15,8 +15,6 @@ import {
   Button,
   Row,
 } from "reactstrap";
-import * as authActions from "../redux/actions/authActions";
-import Cookies from "universal-cookie";
 
 class Navi extends Component {
   state = {
@@ -24,7 +22,7 @@ class Navi extends Component {
   };
 
   toggle() {
-    this.state.isOpen = !this.state.isOpen;
+    this.setState({isOpen: !this.state.isOpen});
   }
 
   logout() {
@@ -34,10 +32,6 @@ class Navi extends Component {
     cookies.remove("username", { path: "/" });
 
     window.location.reload();
-  }
-
-  componentDidMount() {
-    this.props.actions.checkIfLogin();
   }
 
   render() {
@@ -53,7 +47,7 @@ class Navi extends Component {
                   <NavLink href="/components/">Components</NavLink>
                 </NavItem>
               </Nav>
-              {Object.keys(this.props.user).length !== 0 ? (
+              {(Object.keys(this.props.user).length !== 0 || new Cookies().get("accessToken")) ? (
                 <Row>
                   <Cart /> <Button color="primary" className="ml-2" onClick={() => this.logout()}>Logout</Button>
                 </Row>
@@ -77,12 +71,4 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: {
-      checkIfLogin: bindActionCreators(authActions.checkIfLogin, dispatch),
-    },
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Navi);
+export default connect(mapStateToProps)(Navi);

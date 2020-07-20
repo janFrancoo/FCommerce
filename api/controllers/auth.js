@@ -110,9 +110,16 @@ const confirmMail = asyncHandler(async (req, res, next) => {
     sendJWT(user, res);
 });
 
+const adminCheck = asyncHandler(async (req, res, next) => {
+    res.status(200).json({
+        success: true
+    })
+});
+
 module.exports = {
     register,
     login,
     logout,
-    confirmMail
+    confirmMail,
+    adminCheck
 };

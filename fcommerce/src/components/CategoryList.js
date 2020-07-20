@@ -19,8 +19,8 @@ class CategoryList extends Component {
   render() {
     return (
       <ListGroup>
-        {this.props.categories.length !== 0 &&
-          this.props.categories.categories.map((category) => (
+        {
+          this.props.categories.map((category) => (
             <ListGroupItem
               key={category._id}
               active={this.props.currentCategory._id === category._id}
@@ -28,7 +28,8 @@ class CategoryList extends Component {
             >
               {category.name}
             </ListGroupItem>
-          ))}
+          ))
+        }
       </ListGroup>
     );
   }

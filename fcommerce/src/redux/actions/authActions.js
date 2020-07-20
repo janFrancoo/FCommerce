@@ -2,34 +2,6 @@ import * as actionTypes from "./actionTypes";
 import Cookies from "universal-cookie";
 import alertify from "alertifyjs";
 
-export const checkIfLogin = () => (function(dispatch) {
-    const cookies = new Cookies();
-    const accessToken = cookies.get("accessToken");
-        
-    if (!accessToken) {
-        return dispatch(checkIfLoginFail());
-    }
-
-    const email = cookies.get("email");
-    const username = cookies.get("username");
-
-    return dispatch(checkIfLoginSuccess({
-        data: {
-            email, username
-        }
-    }));
-});
-
-export const checkIfLoginSuccess = (user) => ({
-    type: actionTypes.CHECK_IF_LOGIN_SUCCESS,
-    payload: user
-});
-
-export const checkIfLoginFail = () => ({
-    type: actionTypes.CHECK_IF_LOGIN_FAIL,
-    payload: { }
-});
-
 export const login = (email, password) => (function(dispatch) {
     return fetch('http://localhost:5000/api/auth/login', {
         method: 'post',
@@ -52,8 +24,6 @@ export const login = (email, password) => (function(dispatch) {
 export const loginSuccess = (user) => {
     const cookies = new Cookies();
     cookies.set("accessToken", user.access_token, { path: "/", expires: new Date(Date.now()+ 1800000) });
-    cookies.set("email", user.data.email, { path: "/", expires: new Date(Date.now()+ 1800000) });
-    cookies.set("username", user.data.username, { path: "/", expires: new Date(Date.now()+ 1800000) });
 
     return ({
         type: actionTypes.LOGIN_SUCCESS,

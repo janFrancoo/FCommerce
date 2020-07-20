@@ -13,6 +13,7 @@ const sendJWT = (user, res) => {
         data: {
             email: user.email,
             username: user.username,
+            role: user.role
         }
     });
 };

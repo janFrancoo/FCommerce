@@ -9,7 +9,7 @@ import * as productActions from "../redux/actions/productActions";
 class Cart extends Component {
   getTotalPrice() {
     let totalPrice = 0;
-    this.props.cart.map((item) => {
+    this.props.cart.forEach(item => {
       totalPrice += item.amount * item.product.price;
     });
     return totalPrice;

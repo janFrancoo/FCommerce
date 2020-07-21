@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/FCommerce/static/css/main.2e5eac12.chunk.css",
+    "main.js": "/FCommerce/static/js/main.cb2f1053.chunk.js",
+    "main.js.map": "/FCommerce/static/js/main.cb2f1053.chunk.js.map",
+    "runtime-main.js": "/FCommerce/static/js/runtime-main.c7f9d381.js",
+    "runtime-main.js.map": "/FCommerce/static/js/runtime-main.c7f9d381.js.map",
+    "static/css/2.a49e1467.chunk.css": "/FCommerce/static/css/2.a49e1467.chunk.css",
+    "static/js/2.10101f21.chunk.js": "/FCommerce/static/js/2.10101f21.chunk.js",
+    "static/js/2.10101f21.chunk.js.map": "/FCommerce/static/js/2.10101f21.chunk.js.map",
+    "index.html": "/FCommerce/index.html",
+    "precache-manifest.fddf0c99705a0a38a1619068d18272eb.js": "/FCommerce/precache-manifest.fddf0c99705a0a38a1619068d18272eb.js",
+    "service-worker.js": "/FCommerce/service-worker.js",
+    "static/css/2.a49e1467.chunk.css.map": "/FCommerce/static/css/2.a49e1467.chunk.css.map",
+    "static/css/main.2e5eac12.chunk.css.map": "/FCommerce/static/css/main.2e5eac12.chunk.css.map",
+    "static/js/2.10101f21.chunk.js.LICENSE.txt": "/FCommerce/static/js/2.10101f21.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c7f9d381.js",
+    "static/css/2.a49e1467.chunk.css",
+    "static/js/2.10101f21.chunk.js",
+    "static/css/main.2e5eac12.chunk.css",
+    "static/js/main.cb2f1053.chunk.js"
+  ]
+}

@@ -14,7 +14,8 @@ import {
   Card,
   CardBody,
   CardText,
-  CardTitle
+  CardTitle,
+  Spinner
 } from "reactstrap";
 
 class ProductDetail extends Component {
@@ -57,7 +58,7 @@ class ProductDetail extends Component {
   render() {
     return (
       <div className="mt-5">
-        {Object.keys(this.props.product).length !== 0 && (
+        {Object.keys(this.props.product).length !== 0 ? (
           <div>
             <Row>
               <Col xs="6">
@@ -153,7 +154,11 @@ class ProductDetail extends Component {
               </Col>
             </Row>
           </div>
-        )}
+        ) : (
+          <div className="mx-auto my-auto spinner_div vertical-center">
+              <Spinner color="primary" style={{ width: '3rem', height: '3rem' }} className="mx-auto" />
+          </div>
+         ) }
       </div>
     );
   }

@@ -1,7 +1,7 @@
 export default {
     currentCategory: {
-        categoryName: "Category - 1",
-        _id: "5f0f6fef040f321fd838bd47"
+        categoryName: "Electronics",
+        _id: "5f1714350a901c3b10210dfe"
     },
     categories: [],
     products: [],

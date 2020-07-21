@@ -39,11 +39,12 @@ class Search extends Component {
           onChange={(event) => this.search(event)}
         />
         <Dropdown toggle={() => this.toggle()} isOpen={this.state.isOpen}>
-          <DropdownToggle className="hide invisible"></DropdownToggle>
-          <DropdownMenu className="search_box">
+          <DropdownToggle className="invisible"></DropdownToggle>
+          <DropdownMenu >
             {this.props.searchResults.map((product) => (
               <DropdownItem key={product._id}>
                 <Link to={"/product/" + product._id}>
+                  <img src={"http://localhost:5000/" + product.images[0]} alt="" width="25px" height="25px" className="mr-3" />
                   {product.productName}
                 </Link>
               </DropdownItem>

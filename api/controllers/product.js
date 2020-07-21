@@ -138,14 +138,18 @@ const updateProduct = asyncHandler(async (req, res, next) => {
     if (!category)
         return next(new CustomError("Category not found"), 404);
 
-    const product = await Product.findByIdAndUpdate(id, { 
+    const toBeUpdated = { 
         productName,
         inStock: stock,
         price,
-        images,
         category,
         description
-    }, { new: true });
+    };
+
+    if (images.length !== 0)
+        toBeUpdated.images = images;
+
+    const product = await Product.findByIdAndUpdate(id, toBeUpdated, { new: true });
 
     if (!product)
         return next(new CustomError("Product not found"), 404);

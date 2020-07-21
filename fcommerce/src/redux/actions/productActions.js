@@ -5,7 +5,14 @@ import alertify from "alertifyjs";
 export const getProducts = (categoryId) => (function (dispatch) {
     const url = "http://localhost:5000/api/product/products?categoryId=" + categoryId;
     return fetch(url).then(res => res.json())
-    .then(res => dispatch(getProductsSuccess(res.products)))
+    .then(res => {
+        if (res.success !== false)
+            return dispatch(getProductsSuccess(res.products));
+        else {
+            alertify.error(res.message);
+            return dispatch(getProductsFail());
+        }
+    })
 });
 
 export const getProduct = (productId) => (function (dispatch) {
@@ -17,6 +24,11 @@ export const getProduct = (productId) => (function (dispatch) {
 export const getProductsSuccess = (products) => ({
     type: actionTypes.GET_PRODUCTS_SUCCESS,
     payload: products
+});
+
+export const getProductsFail = () => ({
+    type: actionTypes.GET_PRODUCTS_FAIL,
+    payload: {}
 });
 
 export const addProductToCart = (productId, amount) => (function (dispatch) {

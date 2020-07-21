@@ -2,16 +2,19 @@
     cursor: pointer !important;
 }
 
-.search_box {
-    width: 150% !important;
-}
-
-.hide {
-    padding: 0px !important;
-    margin: 0px !important;
-}
-
 .dropdown {
     width: 0px !important;
     height: 0px !important;
+}
+
+.spinner_div {
+    width: 50px !important;
+}
+
+.vertical-center {
+    min-height: 80%;
+    min-height: 80vh;
+  
+    display: flex;
+    align-items: center;
 }

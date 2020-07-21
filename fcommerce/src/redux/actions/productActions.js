@@ -11,7 +11,7 @@ export const getProducts = (categoryId) => (function (dispatch) {
 export const getProduct = (productId) => (function (dispatch) {
     const url = "http://localhost:5000/api/product/" + productId;
     return fetch(url).then(res => res.json())
-    .then(res => dispatch(getProductsSuccess(res)))
+    .then(res => dispatch(getProductsSuccess(res.product)))
 });
 
 export const getProductsSuccess = (products) => ({
@@ -30,7 +30,7 @@ export const addProductToCart = (productId, amount) => (function (dispatch) {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer: ' + accessToken
         },
-        body: JSON.stringify({id: productId, amount})})
+        body: JSON.stringify({id: productId, amount: parseInt(amount)})})
     .then(res => res.json())
     .then(res => {
         if (res.success !== false) {
@@ -106,4 +106,60 @@ export const searchProductSuccess = (products) => ({
 export const searchProductFail = () => ({
     type: actionTypes.SEARCH_PRODUCT_FAIL,
     payload: []
+});
+
+export const getComments = (productId) => (function (dispatch) {
+    return fetch("http://localhost:5000/api/product/" + productId + "/comments")
+    .then(res => res.json())
+    .then(res => {
+        if (res.sucess !== false) {
+            return dispatch(getCommentsSuccess(res.comments));
+        } else {
+            alertify.error(res.message);
+            return dispatch(getCommentsFail());
+        }
+    })
+});
+
+export const getCommentsSuccess = (comments) => ({
+    type: actionTypes.GET_COMMENTS_SUCCESS,
+    payload: comments
+});
+
+export const getCommentsFail = () => ({
+    type: actionTypes.GET_COMMENTS_FAIL,
+    payload: []
+});
+
+export const addComment = (productId, comment) => (function (dispatch) {
+    const cookies = new Cookies();
+    const accessToken = cookies.get("accessToken");
+
+    return fetch('http://localhost:5000/api/product/add-comment', {
+        method: 'post',
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer: ' + accessToken
+        },
+        body: JSON.stringify({id: productId, message: comment})})
+    .then(res => res.json())
+    .then(res => {
+        if (res.success !== false) {
+            return dispatch(addCommentSuccess(res.comment));
+        } else {
+            alertify.error(res.message);
+            return dispatch(addCommentFail());
+        }
+    });
+});
+
+export const addCommentSuccess = (comment) => ({
+    type: actionTypes.ADD_COMMENT_SUCCESS,
+    payload: comment
+});
+
+export const addCommentFail = () => ({
+    type: actionTypes.ADD_COMMENT_FAIL,
+    payload: {}
 });

@@ -7,6 +7,7 @@ import authReducer from "./authReducer";
 import cartReducer from "./cartReducer";
 import adminCheckReducer from "./adminCheckReducer";
 import searchReducer from "./searchReducer";
+import commentReducer from "./commentReducer";
 
 const rootReducer = combineReducers({
     categoryListReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     authReducer,
     cartReducer,
     adminCheckReducer,
-    searchReducer
+    searchReducer,
+    commentReducer
 });
 
 export default rootReducer;

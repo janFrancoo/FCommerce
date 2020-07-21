@@ -40,7 +40,6 @@ class Cart extends Component {
         <DropdownMenu>
           {this.props.cart.map((item) => (
             <DropdownItem key={item._id}>
-              {console.log(item)}
               {item.product.productName}{" "}
               <Badge color="success">{item.amount}</Badge>
               <Badge

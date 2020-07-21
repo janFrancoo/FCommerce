@@ -8,9 +8,7 @@ import {
   Dropdown,
   DropdownToggle,
   DropdownItem,
-  DropdownMenu,
-  Row,
-  Col,
+  DropdownMenu
 } from "reactstrap";
 
 class Search extends Component {

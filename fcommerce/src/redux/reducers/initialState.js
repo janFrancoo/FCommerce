@@ -9,5 +9,6 @@ export default {
     user: { },
     cartItems: [],
     adminPerm: false,
-    searchResult: []
+    searchResult: [],
+    comments: []
 }

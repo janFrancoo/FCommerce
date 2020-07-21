@@ -78,7 +78,7 @@ const getComments = asyncHandler(async (req, res, next) => {
 
     const comments = await Comment.find({
         product
-    }).populate("user", "username");
+    }).sort({'date': -1}).populate("user", "username");
 
     res.status(200).json({
         success: true,

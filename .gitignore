@@ -1,4 +1,5 @@
 api/config.env
 api/node_modules/
+api/public/
 node_modules/
 fcommerce/node_modules
